@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"encoding/json"
+	"ims/entity"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -19,7 +20,7 @@ func TestCRUD(t *testing.T) {
 	defer server.Close()
 
 	// Create Item
-	newItem := Item{Name: "Test Item"}
+	newItem := entity.Item{Name: "Test Item"}
 	newItemJSON, _ := json.Marshal(newItem)
 
 	resp, err := http.Post(server.URL+"/items", "application/json", bytes.NewBuffer(newItemJSON))

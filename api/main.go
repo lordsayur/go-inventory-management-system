@@ -3,22 +3,18 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"ims/entity"
 	"log"
 	"net/http"
 
 	"github.com/gorilla/mux"
 )
 
-type Item struct {
-	ID   int    `json:"id"`
-	Name string `json:"name"`
-}
-
-var items = make(map[int]Item)
+var items = make(map[int]entity.Item)
 var lastID = 0
 
 func createItem(w http.ResponseWriter, r *http.Request) {
-	var newItem Item
+	var newItem entity.Item
 	err := json.NewDecoder(r.Body).Decode(&newItem)
 
 	if err != nil {
@@ -34,7 +30,7 @@ func createItem(w http.ResponseWriter, r *http.Request) {
 }
 
 func readItems(w http.ResponseWriter, r *http.Request) {
-	itemList := []Item{}
+	itemList := []entity.Item{}
 
 	for _, item := range items {
 		itemList = append(itemList, item)
