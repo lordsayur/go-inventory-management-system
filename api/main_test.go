@@ -3,24 +3,25 @@ package main
 import (
 	"bytes"
 	"encoding/json"
-	"ims/entity"
+	"ims/api/routers"
+	"ims/core/entities"
+	"ims/core/usecases"
+	"infrastructure/repositories"
 	"net/http"
 	"net/http/httptest"
 	"testing"
-
-	"github.com/gorilla/mux"
 )
 
 func TestCRUD(t *testing.T) {
-	r := mux.NewRouter()
-	r.HandleFunc("/items", createItem).Methods("POST")
-	r.HandleFunc("/items", readItems).Methods("GET")
+	itemRepo := repositories.NewMemoryItemRepository()
+	itemUsecase := usecases.NewItemUsecase(itemRepo)
+	router := routers.NewRouter(*itemUsecase)
 
-	server := httptest.NewServer(r)
+	server := httptest.NewServer(router)
 	defer server.Close()
 
 	// Create Item
-	newItem := entity.Item{Name: "Test Item"}
+	newItem := entities.Item{Name: "Test Item"}
 	newItemJSON, _ := json.Marshal(newItem)
 
 	resp, err := http.Post(server.URL+"/items", "application/json", bytes.NewBuffer(newItemJSON))
