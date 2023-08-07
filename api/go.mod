@@ -1,4 +1,4 @@
-module ims
+module ims/api
 
 go 1.20
 
