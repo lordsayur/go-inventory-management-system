@@ -15,11 +15,7 @@ func NewItemUsecase(itemRepo interfaces.ItemRepository) *ItemUsecase {
 	}
 }
 
-func (u *ItemUsecase) CreateItem(name string) error {
-	item := &entities.Item{
-		Name: name,
-	}
-
+func (u *ItemUsecase) CreateItem(item *entities.Item) error {
 	return u.itemRepo.Create(item)
 }
 

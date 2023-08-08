@@ -29,7 +29,7 @@ func (h *ItemsController) CreateItem(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = h.itemUsecase.CreateItem(newItem.Name)
+	err = h.itemUsecase.CreateItem(&newItem)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
