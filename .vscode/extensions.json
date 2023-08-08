@@ -3,6 +3,9 @@
         "rangav.vscode-thunder-client",
         "golang.go",
         "seatonjiang.gitmoji-vscode",
-        "qwtel.sqlite-viewer"
+        "qwtel.sqlite-viewer",
+        "vue.volar",
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint"
     ]
 }
