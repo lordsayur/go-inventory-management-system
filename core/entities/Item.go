@@ -7,7 +7,7 @@ var (
 )
 
 type Item struct {
-	ID          int     `json:"id"`
+	ID          int     `json:"id" xorm:"'id' pk autoincr"`
 	Name        string  `json:"name"`
 	Description string  `json:"description"`
 	Quantity    int     `json:"quantity"`
