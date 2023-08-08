@@ -1,6 +1,7 @@
 package repositories
 
 import (
+	"fmt"
 	"ims/core/entities"
 	"log"
 
@@ -42,8 +43,13 @@ func (r *XORMItemRepository) Create(item *entities.Item) error {
 
 func (r *XORMItemRepository) ReadAll(sortField string, sortOrder string) ([]entities.Item, error) {
 	var items []entities.Item
-	err := r.engine.Find(&items)
+	session := r.engine.NewSession()
 
+	if sortField != "" {
+		session.OrderBy(fmt.Sprintf("%s %s", sortField, sortOrder))
+	}
+
+	err := session.Find(&items)
 	if err != nil {
 		log.Println("Error reading items:", err)
 		return nil, err
