@@ -23,8 +23,8 @@ func (u *ItemUsecase) CreateItem(name string) error {
 	return u.itemRepo.Create(item)
 }
 
-func (u *ItemUsecase) GetAllItems() ([]entities.Item, error) {
-	return u.itemRepo.ReadAll()
+func (u *ItemUsecase) GetAllItems(sortField string, sortOrder string) ([]entities.Item, error) {
+	return u.itemRepo.ReadAll(sortField, sortOrder)
 }
 
 func (u *ItemUsecase) UpdateItem(item *entities.Item) error {

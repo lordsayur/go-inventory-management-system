@@ -2,6 +2,7 @@ package repositories
 
 import (
 	"ims/core/entities"
+	"sort"
 	"sync"
 )
 
@@ -29,13 +30,24 @@ func (r *MemoryItemRepository) Create(item *entities.Item) error {
 	return nil
 }
 
-func (r *MemoryItemRepository) ReadAll() ([]entities.Item, error) {
+func (r *MemoryItemRepository) ReadAll(sortField string, sortOrder string) ([]entities.Item, error) {
 	r.mu.Lock()
 	defer r.mu.Unlock()
 
 	var items []entities.Item
 	for _, item := range r.items {
 		items = append(items, item)
+	}
+
+	switch sortField {
+	case "name":
+		sort.Slice(items, func(i, j int) bool {
+			if sortOrder == "desc" {
+				return items[i].Name > items[j].Name
+			}
+
+			return items[i].Name < items[j].Name
+		})
 	}
 
 	return items, nil

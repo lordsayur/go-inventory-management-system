@@ -39,7 +39,10 @@ func (h *ItemsController) CreateItem(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *ItemsController) GetAllItems(w http.ResponseWriter, r *http.Request) {
-	items, err := h.itemUsecase.GetAllItems()
+	sortField := r.URL.Query().Get("sortField")
+	sortOrder := r.URL.Query().Get("sortOrder")
+
+	items, err := h.itemUsecase.GetAllItems(sortField, sortOrder)
 
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
