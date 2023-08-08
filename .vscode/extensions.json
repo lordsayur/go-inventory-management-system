@@ -1,6 +1,7 @@
 {
     "recommendations": [
         "rangav.vscode-thunder-client",
-        "golang.go"
+        "golang.go",
+        "seatonjiang.gitmoji-vscode"
     ]
 }
