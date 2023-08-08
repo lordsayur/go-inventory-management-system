@@ -12,6 +12,8 @@ func NewItemRouter(r *mux.Router, itemUsecase interfaces.ItemUsecase) *mux.Route
 
 	r.HandleFunc("/items", itemController.CreateItem).Methods("POST")
 	r.HandleFunc("/items", itemController.GetAllItems).Methods("GET")
+	r.HandleFunc("/items/{id:[0-9]+}", itemController.UpdateItem).Methods("PUT")
+	r.HandleFunc("/items/{id:[0-9]+}", itemController.DeleteItem).Methods("DELETE")
 
 	return r
 }

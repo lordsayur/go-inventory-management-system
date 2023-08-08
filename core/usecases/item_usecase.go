@@ -26,3 +26,12 @@ func (u *ItemUsecase) CreateItem(name string) error {
 func (u *ItemUsecase) GetAllItems() ([]entities.Item, error) {
 	return u.itemRepo.ReadAll()
 }
+
+func (u *ItemUsecase) UpdateItem(item *entities.Item) error {
+
+	return u.itemRepo.Update(item)
+}
+
+func (u *ItemUsecase) DeleteItem(id int) error {
+	return u.itemRepo.Delete(id)
+}

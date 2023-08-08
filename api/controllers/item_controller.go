@@ -5,6 +5,9 @@ import (
 	"ims/core/entities"
 	"ims/core/interfaces"
 	"net/http"
+	"strconv"
+
+	"github.com/gorilla/mux"
 )
 
 type ItemsController struct {
@@ -45,4 +48,56 @@ func (h *ItemsController) GetAllItems(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(items)
+}
+
+func (h *ItemsController) UpdateItem(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id, err := strconv.Atoi(vars["id"])
+
+	if err != nil {
+		http.Error(w, "Invalid ID", http.StatusBadRequest)
+		return
+	}
+
+	var updatedItem entities.Item
+	err = json.NewDecoder(r.Body).Decode(&updatedItem)
+
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	updatedItem.ID = id
+	err = h.itemUsecase.UpdateItem(&updatedItem)
+
+	if err != nil {
+		if err == entities.ErrNotFound {
+			http.Error(w, "Item not found", http.StatusNotFound)
+		} else {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+		}
+
+		return
+	}
+}
+
+func (h *ItemsController) DeleteItem(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id, err := strconv.Atoi(vars["id"])
+
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	err = h.itemUsecase.DeleteItem(id)
+
+	if err != nil {
+		if err == entities.ErrNotFound {
+			http.Error(w, "Item not found", http.StatusNotFound)
+		} else {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+		}
+		return
+	}
 }

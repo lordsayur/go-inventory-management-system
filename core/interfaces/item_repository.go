@@ -7,4 +7,6 @@ import (
 type ItemRepository interface {
 	Create(item *entities.Item) error
 	ReadAll() ([]entities.Item, error)
+	Update(item *entities.Item) error
+	Delete(id int) error
 }

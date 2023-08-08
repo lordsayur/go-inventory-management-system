@@ -9,6 +9,7 @@ import (
 	"infrastructure/repositories"
 	"net/http"
 	"net/http/httptest"
+	"strconv"
 	"testing"
 
 	"github.com/gorilla/mux"
@@ -19,7 +20,7 @@ func TestCRUD(t *testing.T) {
 	itemUsecase := usecases.NewItemUsecase(itemRepo)
 
 	router := mux.NewRouter()
-	router = routers.NewItemRouter(router, *itemUsecase)
+	router = routers.NewItemRouter(router, itemUsecase)
 
 	server := httptest.NewServer(router)
 	defer server.Close()
@@ -59,4 +60,41 @@ func TestCRUD(t *testing.T) {
 	}
 
 	resp.Body.Close()
+
+	// Update Item
+	if len(items) > 0 {
+		itemToUpdate := items[0]
+		itemToUpdate.Name = "Updated Item"
+		updateJSON, _ := json.Marshal(itemToUpdate)
+		req, _ := http.NewRequest(http.MethodPut, server.URL+"/items/"+strconv.Itoa(itemToUpdate.ID), bytes.NewBuffer(updateJSON))
+		req.Header.Set("Content-Type", "application/json")
+		resp, err = http.DefaultClient.Do(req)
+
+		if err != nil {
+			t.Fatalf("Error updating item: %v", err)
+		}
+		if resp.StatusCode != http.StatusOK {
+			t.Errorf("Expected status code %d but got %d", http.StatusOK, resp.StatusCode)
+		}
+
+		resp.Body.Close()
+	}
+
+	// Delete Item
+	if len(items) > 0 {
+		itemToDelete := items[0]
+		req, _ := http.NewRequest(http.MethodDelete, server.URL+"/items/"+strconv.Itoa(itemToDelete.ID), nil)
+
+		resp, err := http.DefaultClient.Do(req)
+
+		if err != nil {
+			t.Fatalf("Error deleting item: %v", err)
+		}
+
+		if resp.StatusCode != http.StatusOK {
+			t.Errorf("Expected status code %d but got %d", http.StatusOK, resp.StatusCode)
+		}
+
+		resp.Body.Close()
+	}
 }
