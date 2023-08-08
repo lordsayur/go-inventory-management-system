@@ -3,15 +3,15 @@ package controllers
 import (
 	"encoding/json"
 	"ims/core/entities"
-	"ims/core/usecases"
+	"ims/core/interfaces"
 	"net/http"
 )
 
 type ItemsController struct {
-	itemUsecase usecases.ItemUsecase
+	itemUsecase interfaces.ItemUsecase
 }
 
-func NewItemController(itemUsecase usecases.ItemUsecase) *ItemsController {
+func NewItemController(itemUsecase interfaces.ItemUsecase) *ItemsController {
 	return &ItemsController{
 		itemUsecase: itemUsecase,
 	}

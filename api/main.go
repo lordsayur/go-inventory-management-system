@@ -16,7 +16,7 @@ func main() {
 	itemUsecase := usecases.NewItemUsecase(itemRepo)
 
 	router := mux.NewRouter()
-	router = routers.NewItemRouter(router, *itemUsecase)
+	router = routers.NewItemRouter(router, itemUsecase)
 
 	port := 8080
 	fmt.Printf("Server started on port %d...\n", port)
