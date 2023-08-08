@@ -2,6 +2,7 @@
     "recommendations": [
         "rangav.vscode-thunder-client",
         "golang.go",
-        "seatonjiang.gitmoji-vscode"
+        "seatonjiang.gitmoji-vscode",
+        "qwtel.sqlite-viewer"
     ]
 }
