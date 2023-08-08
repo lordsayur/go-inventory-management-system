@@ -51,5 +51,12 @@ func TestCRUD(t *testing.T) {
 		t.Errorf("Expected status code %d but got %d", http.StatusOK, resp.StatusCode)
 	}
 
+	var items []entities.Item
+	err = json.NewDecoder(resp.Body).Decode(&items)
+
+	if err != nil {
+		t.Fatalf("Error decoding response: %v", err)
+	}
+
 	resp.Body.Close()
 }
