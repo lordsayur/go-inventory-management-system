@@ -53,13 +53,25 @@ func (r *XORMItemRepository) ReadAll(sortField string, sortOrder string) ([]enti
 }
 
 func (r *XORMItemRepository) Update(item *entities.Item) error {
+	_, err := r.engine.ID(item.ID).Update(item)
+	if err != nil {
+		log.Println("Error updating item:", err)
+		return err
+	}
 
-	return entities.ErrNotFound
+	return nil
 }
 
 func (r *XORMItemRepository) Delete(id int) error {
+	item := &entities.Item{ID: id}
 
-	return entities.ErrNotFound
+	_, err := r.engine.ID(id).Delete(item)
+	if err != nil {
+		log.Println("Error deleting item:", err)
+		return err
+	}
+
+	return nil
 }
 
 func (r *XORMItemRepository) CreateTable() error {
