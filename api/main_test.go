@@ -10,12 +10,16 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
+
+	"github.com/gorilla/mux"
 )
 
 func TestCRUD(t *testing.T) {
 	itemRepo := repositories.NewMemoryItemRepository()
 	itemUsecase := usecases.NewItemUsecase(itemRepo)
-	router := routers.NewRouter(*itemUsecase)
+
+	router := mux.NewRouter()
+	router = routers.NewItemRouter(router, *itemUsecase)
 
 	server := httptest.NewServer(router)
 	defer server.Close()

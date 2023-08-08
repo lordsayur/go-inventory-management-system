@@ -7,12 +7,16 @@ import (
 	"infrastructure/repositories"
 	"log"
 	"net/http"
+
+	"github.com/gorilla/mux"
 )
 
 func main() {
 	itemRepo := repositories.NewMemoryItemRepository()
 	itemUsecase := usecases.NewItemUsecase(itemRepo)
-	router := routers.NewRouter(*itemUsecase)
+
+	router := mux.NewRouter()
+	router = routers.NewItemRouter(router, *itemUsecase)
 
 	port := 8080
 	fmt.Printf("Server started on port %d...\n", port)

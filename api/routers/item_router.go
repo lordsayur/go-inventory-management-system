@@ -7,9 +7,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
-func NewRouter(itemUsecase usecases.ItemUsecase) *mux.Router {
-	r := mux.NewRouter()
-
+func NewItemRouter(r *mux.Router, itemUsecase usecases.ItemUsecase) *mux.Router {
 	itemController := controllers.NewItemController(itemUsecase)
 
 	r.HandleFunc("/items", itemController.CreateItem).Methods("POST")
