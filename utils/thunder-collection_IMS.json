@@ -1,0 +1,94 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "IMS",
+    "dateExported": "2023-08-09T06:24:06.481Z",
+    "version": "1.1",
+    "folders": [
+        {
+            "_id": "ed12699b-ae63-4d01-800c-db751fb69f66",
+            "name": "Items",
+            "containerId": "",
+            "created": "2023-08-09T06:20:08.344Z",
+            "sortNum": 10000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "3e303a05-00eb-48ea-a7b6-088d94db30c2",
+            "colId": "3c67e329-7d0d-4b7b-9efe-e2f003376365",
+            "containerId": "ed12699b-ae63-4d01-800c-db751fb69f66",
+            "name": "Items",
+            "url": "{{url}}/items",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-08-09T06:19:58.150Z",
+            "modified": "2023-08-09T06:19:58.150Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Item 1\",\n  \"description\": \"Description\",\n  \"quantity\": 1,\n  \"price\": 1.3\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "cbb7a713-928b-478d-8265-2d7b91337978",
+            "colId": "3c67e329-7d0d-4b7b-9efe-e2f003376365",
+            "containerId": "ed12699b-ae63-4d01-800c-db751fb69f66",
+            "name": "Items",
+            "url": "{{url}}/items?sortField=name&sortOrder=asc",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2023-08-09T06:20:18.659Z",
+            "modified": "2023-08-09T06:21:23.054Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "sortField",
+                    "value": "name",
+                    "isPath": false
+                },
+                {
+                    "name": "sortOrder",
+                    "value": "asc",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "e0d314c4-6a24-4616-90f7-645233d5d18e",
+            "colId": "3c67e329-7d0d-4b7b-9efe-e2f003376365",
+            "containerId": "ed12699b-ae63-4d01-800c-db751fb69f66",
+            "name": "Items by ID",
+            "url": "{{url}}/items/1",
+            "method": "PUT",
+            "sortNum": 30000,
+            "created": "2023-08-09T06:22:13.382Z",
+            "modified": "2023-08-09T06:23:06.423Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Item 1\",\n  \"description\": \"Updated description\",\n  \"quantity\": 1,\n  \"price\": 1.3\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "b067e80d-9aa2-4a41-afe7-647d18a06c84",
+            "colId": "3c67e329-7d0d-4b7b-9efe-e2f003376365",
+            "containerId": "ed12699b-ae63-4d01-800c-db751fb69f66",
+            "name": "Items by ID",
+            "url": "{{url}}/items/4",
+            "method": "DELETE",
+            "sortNum": 40000,
+            "created": "2023-08-09T06:23:30.419Z",
+            "modified": "2023-08-09T06:23:47.206Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        }
+    ]
+}
