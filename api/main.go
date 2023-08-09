@@ -12,8 +12,10 @@ import (
 )
 
 func main() {
-	xormItemRepository := repositories.NewXORMItemRepository()
-	itemUsecase := usecases.NewItemUsecase(xormItemRepository)
+	// itemRepository := repositories.NewMemoryItemRepository()
+	itemRepository := repositories.NewXORMItemRepository()
+
+	itemUsecase := usecases.NewItemUsecase(itemRepository)
 
 	router := mux.NewRouter()
 	router = routers.NewItemRouter(router, itemUsecase)
