@@ -21,6 +21,11 @@ func NewItemController(itemUsecase interfaces.ItemUsecase) *ItemsController {
 }
 
 func (h *ItemsController) CreateItem(w http.ResponseWriter, r *http.Request) {
+	if r.Method == http.MethodOptions {
+		w.WriteHeader(http.StatusOK)
+		return
+	}
+
 	var newItem entities.Item
 	err := json.NewDecoder(r.Body).Decode(&newItem)
 
@@ -39,6 +44,11 @@ func (h *ItemsController) CreateItem(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *ItemsController) GetAllItems(w http.ResponseWriter, r *http.Request) {
+	if r.Method == http.MethodOptions {
+		w.WriteHeader(http.StatusOK)
+		return
+	}
+
 	sortField := r.URL.Query().Get("sortField")
 	sortOrder := r.URL.Query().Get("sortOrder")
 
@@ -54,6 +64,11 @@ func (h *ItemsController) GetAllItems(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *ItemsController) UpdateItem(w http.ResponseWriter, r *http.Request) {
+	if r.Method == http.MethodOptions {
+		w.WriteHeader(http.StatusOK)
+		return
+	}
+
 	vars := mux.Vars(r)
 	id, err := strconv.Atoi(vars["id"])
 
@@ -85,6 +100,11 @@ func (h *ItemsController) UpdateItem(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *ItemsController) DeleteItem(w http.ResponseWriter, r *http.Request) {
+	if r.Method == http.MethodOptions {
+		w.WriteHeader(http.StatusOK)
+		return
+	}
+
 	vars := mux.Vars(r)
 	id, err := strconv.Atoi(vars["id"])
 
