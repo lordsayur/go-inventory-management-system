@@ -41,6 +41,22 @@ func (r *XORMItemRepository) Create(item *entities.Item) error {
 	return nil
 }
 
+func (r *XORMItemRepository) ReadById(id int) (*entities.Item, error) {
+	item := new(entities.Item)
+	found, err := r.engine.ID(id).Get(item)
+
+	if err != nil {
+		println("Error getting item", err)
+		return nil, err
+	}
+
+	if !found {
+		return nil, entities.ErrNotFound
+	}
+
+	return item, nil
+}
+
 func (r *XORMItemRepository) ReadAll(sortField string, sortOrder string) ([]entities.Item, error) {
 	var items []entities.Item
 	session := r.engine.NewSession()

@@ -13,6 +13,7 @@ func NewItemRouter(r *mux.Router, itemUsecase interfaces.ItemUsecase) *mux.Route
 
 	r.HandleFunc("/items", enableCORS(itemController.CreateItem)).Methods("POST")
 	r.HandleFunc("/items", enableCORS(itemController.GetAllItems)).Methods("GET")
+	r.HandleFunc("/items/{id:[0-9]+}", enableCORS(itemController.GetById)).Methods("GET")
 	r.HandleFunc("/items/{id:[0-9]+}", enableCORS(itemController.UpdateItem)).Methods("PUT")
 	r.HandleFunc("/items/{id:[0-9]+}", enableCORS(itemController.DeleteItem)).Methods("DELETE")
 

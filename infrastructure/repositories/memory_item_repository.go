@@ -30,6 +30,19 @@ func (r *MemoryItemRepository) Create(item *entities.Item) error {
 	return nil
 }
 
+func (r *MemoryItemRepository) ReadById(id int) (*entities.Item, error) {
+	r.mu.Lock()
+	defer r.mu.Unlock()
+
+	item, ok := r.items[id]
+
+	if !ok {
+		return nil, entities.ErrNotFound
+	}
+
+	return &item, nil
+}
+
 func (r *MemoryItemRepository) ReadAll(sortField string, sortOrder string) ([]entities.Item, error) {
 	r.mu.Lock()
 	defer r.mu.Unlock()

@@ -19,6 +19,10 @@ func (u *ItemUsecase) CreateItem(item *entities.Item) error {
 	return u.itemRepo.Create(item)
 }
 
+func (u *ItemUsecase) GetById(id int) (*entities.Item, error) {
+	return u.itemRepo.ReadById(id)
+}
+
 func (u *ItemUsecase) GetAllItems(sortField string, sortOrder string) ([]entities.Item, error) {
 	return u.itemRepo.ReadAll(sortField, sortOrder)
 }

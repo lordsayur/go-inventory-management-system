@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "IMS",
-    "dateExported": "2023-08-09T06:24:06.481Z",
+    "dateExported": "2023-08-09T15:32:58.164Z",
     "version": "1.1",
     "folders": [
         {
@@ -28,6 +28,25 @@
             "body": {
                 "type": "json",
                 "raw": "{\n  \"name\": \"Item 1\",\n  \"description\": \"Description\",\n  \"quantity\": 1,\n  \"price\": 1.3\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "d9b41ec6-b108-4377-af77-54bb1b297a3c",
+            "colId": "3c67e329-7d0d-4b7b-9efe-e2f003376365",
+            "containerId": "ed12699b-ae63-4d01-800c-db751fb69f66",
+            "name": "Items by ID",
+            "url": "{{url}}/items/1",
+            "method": "GET",
+            "sortNum": 15000,
+            "created": "2023-08-09T15:31:34.296Z",
+            "modified": "2023-08-09T15:32:42.672Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Item 1\",\n  \"description\": \"Updated description\",\n  \"quantity\": 1,\n  \"price\": 1.3\n}",
                 "form": []
             },
             "tests": []
