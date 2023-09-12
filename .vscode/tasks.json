@@ -1,0 +1,25 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "go",
+      "label": "go: test api package",
+      "command": "test",
+      "args": ["${workspaceFolder}/api"],
+      "problemMatcher": ["$go"],
+      "group": "test",
+      "detail": "cd ${workspaceFolder}/api; go test",
+      "icon": { "id": "beaker", "color": "terminal.ansiYellow" }
+    },
+    {
+      "type": "go",
+      "label": "go: run api package",
+      "command": "run",
+      "args": ["${workspaceFolder}/api"],
+      "problemMatcher": ["$go"],
+      "group": "none",
+      "detail": "cd ${workspaceFolder}/api; go run main.go",
+      "icon": { "id": "play", "color": "terminal.ansiBlue" }
+    }
+  ]
+}
